@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+#//Verteilte Anwendungen - Uebungsblatt 6
+#//Aufgabe 1a: RMI-IRC Buildscript
+
+killall rmiregistry
+rmic rmi.SubscriberImpl
+rmic rmi.PublisherServant
+rmiregistry &
+javac rmi/*.java
+java -Djava.security.policy=rmi/SecurityPolicy.txt -Djava.rmi.server.codebase=http://localhost:2001/ rmi.Server $*
+killall rmiregistry
+
+#//Start server
+#Option 1.) java -Djava.security.policy=rmi/SecurityPolicy.txt -Djava.rmi.server.codebase=http://localhost:2001/ rmi.Server
+#Option 2.) java -Djava.security.policy=rmi/SecurityPolicy.txt -Djava.rmi.server.codebase=file:///Users/joerg/Documents/dev/workspace/irc/bin/ rmi.Server
+#Option 3.) java -Djava.security.policy=rmi/SecurityPolicy.txt rmi.Server
+
+#//Start client
+#Option 1.) java -Djava.security.policy=rmi/SecurityPolicy.txt -Djava.rmi.server.codebase=http://localhost:2001/ rmi.Client karl
+#Option 2.) java -Djava.security.policy=rmi/SecurityPolicy.txt -Djava.rmi.server.codebase=file:///Users/joerg/Documents/dev/workspace/irc/bin/ rmi.Client karl
+#Option 3.) java -Djava.security.policy=rmi/SecurityPolicy.txt rmi.Client karl

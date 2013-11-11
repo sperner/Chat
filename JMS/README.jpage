@@ -1,0 +1,11 @@
+RUNS WITH OPENJMS
+export JAVA_HOME=/Library/Java/Home
+./startup.sh & in OPENJMS bin
+require MyQueue to be set up (e.g. via admin gui: $./admin.sh in OPENJMS bin)
+
+$ java -cp .:/Users/joerg/Documents/dev/java/openjms-0.7.7-beta-1/lib/openjms-0.7.7-beta-1.jar  jms.SimpleQueueReceiver MyQueue
+$ java -cp .:/Users/joerg/Documents/dev/java/openjms-0.7.7-beta-1/lib/openjms-0.7.7-beta-1.jar  jms.SimpleQueueSender MyQueue
+
+require MyTopic to be set up (e.g. via admin gui: $./admin.sh in OPENJMS bin)
+$ java -cp .:/Users/joerg/Documents/dev/java/openjms-0.7.7-beta-1/lib/openjms-0.7.7-beta-1.jar  jms.SimpleTopicSubscriber MyTopic
+$ java -cp .:/Users/joerg/Documents/dev/java/openjms-0.7.7-beta-1/lib/openjms-0.7.7-beta-1.jar  jms.SimpleTopicPublisher MyTopic
